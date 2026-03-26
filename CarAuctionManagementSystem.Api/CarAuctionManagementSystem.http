@@ -1,0 +1,86 @@
+@CarAuctionManagementSystem_HostAddress = http://localhost:5288
+
+POST {{CarAuctionManagementSystem_HostAddress}}/api/vehicles
+Content-Type: application/json
+
+{
+  "VehicleType": "SUV",
+  "NumberOfSeats": 1,
+  "VIN": "sdgdsgdfss",
+  "Manufacturer": "Ford",
+  "Model": "S-MAX",
+  "Year": 2020,
+  "StartingBid": 10000
+}
+
+###
+
+POST {{CarAuctionManagementSystem_HostAddress}}/api/vehicles
+Content-Type: application/json
+
+{
+  "VehicleType": "SUV",
+  "NumberOfSeats": 1,
+  "VIN": "sdgdsgdfsseee",
+  "Manufacturer": "Ford"
+}
+
+###
+
+GET {{CarAuctionManagementSystem_HostAddress}}/api/vehicles/types/SUV
+Accept: application/json
+
+###
+
+GET {{CarAuctionManagementSystem_HostAddress}}/api/vehicles/manufacturers/Ford
+Accept: application/json
+
+###
+
+GET {{CarAuctionManagementSystem_HostAddress}}/api/vehicles/models/S-MAX
+Accept: application/json
+
+###
+
+GET {{CarAuctionManagementSystem_HostAddress}}/api/vehicles/years/2020
+Accept: application/json
+
+###
+
+POST {{CarAuctionManagementSystem_HostAddress}}/api/auctions/start
+Content-Type: application/json
+
+{
+  "Vin": "sdgdsgdfss"
+}
+
+###
+
+GET {{CarAuctionManagementSystem_HostAddress}}/api/auctions/vin/sdgdsgdfs
+Accept: application/json
+
+###
+
+GET {{CarAuctionManagementSystem_HostAddress}}/api/auctions
+Accept: application/json
+
+###
+
+POST {{CarAuctionManagementSystem_HostAddress}}/api/auctions/bid
+Content-Type: application/json
+
+{
+  "Vin": "sdgdsgdfs",
+  "Bid": 1000
+}
+
+###
+
+POST {{CarAuctionManagementSystem_HostAddress}}/api/auctions/stop
+Content-Type: application/json
+
+{
+  "Vin": "sdgdsgdfss"
+}
+
+###
