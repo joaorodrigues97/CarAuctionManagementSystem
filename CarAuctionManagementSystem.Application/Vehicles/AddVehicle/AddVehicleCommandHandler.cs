@@ -9,8 +9,8 @@ namespace CarAuctionManagementSystem.Application.Vehicles.AddVehicle;
 public sealed class AddVehicleCommandHandler(IVehicleRepository vehicleRepository,
                                              IValidator<AddVehicleCommand> validator) : ICommandHandler<AddVehicleCommand, bool>
 {
-    public Result<bool> Handle(AddVehicleCommand command, 
-                               CancellationToken cancellationToken)
+    public Result<bool> Handle(AddVehicleCommand command,
+        CancellationToken cancellationToken)
     {
         var validationResult = validator.Validate(command);
 

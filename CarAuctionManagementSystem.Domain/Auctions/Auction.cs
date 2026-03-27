@@ -10,7 +10,7 @@ public record Auction
 
     public int LastBid { get; set; } = 0;
 
-    public DateTime StartDate { get; set; } = DateTime.Now;
+    public DateTime StartDate { get; set; } = DateTime.UtcNow;
 
     public DateTime? EndDate { get; set; }
 

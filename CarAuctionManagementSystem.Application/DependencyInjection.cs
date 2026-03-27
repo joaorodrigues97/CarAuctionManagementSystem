@@ -13,6 +13,7 @@ using CarAuctionManagementSystem.Domain.Auctions;
 using CarAuctionManagementSystem.Domain.Vehicles;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using Quartz;
 
 namespace CarAuctionManagementSystem.Application;
 

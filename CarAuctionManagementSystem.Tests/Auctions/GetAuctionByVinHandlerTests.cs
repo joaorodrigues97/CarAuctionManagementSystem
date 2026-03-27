@@ -63,6 +63,6 @@ public class GetAuctionByVinHandlerTests
         // Assert
         Assert.True(result.IsFailure);
         Assert.Contains(result.Errors, error => error.Code == "Auctions.NotFound");
-        Assert.Contains(result.Errors, error => error.Code == "No auctions were found!");
+        Assert.Contains(result.Errors, error => error.Name == "No auctions were found!");
     }
 }

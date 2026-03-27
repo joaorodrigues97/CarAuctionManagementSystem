@@ -63,6 +63,6 @@ public class GetVehicleByManufacturerHandlerTests
         // Assert
         Assert.True(result.IsFailure);
         Assert.Contains(result.Errors, error => error.Code == "Vehicles.NotFound");
-        Assert.Contains(result.Errors, error => error.Code == "No vehicles were found!");
+        Assert.Contains(result.Errors, error => error.Name == "No vehicles were found!");
     }
 }

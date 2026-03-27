@@ -5,6 +5,7 @@ using CarAuctionManagementSystem.Domain.Vehicles;
 using FluentValidation;
 using FluentValidation.Results;
 using Moq;
+using Quartz;
 using Xunit;
 
 namespace CarAuctionManagementSystem.Tests.Auctions;
@@ -15,13 +16,15 @@ public class StartAuctionHandlerTests
     private readonly Mock<IVehicleRepository> _vehicleRepositoryMock;
     private readonly Mock<IValidator<StartAuctionCommand>> _validatorMock;
     private readonly StartAuctionCommandHandler _handler;
+    private readonly Mock<ISchedulerFactory> _schedulerFactoryMock;
     
     public StartAuctionHandlerTests()
     {
         _auctionRepositoryMock = new Mock<IAuctionRepository>();
         _vehicleRepositoryMock = new Mock<IVehicleRepository>();
         _validatorMock = new Mock<IValidator<StartAuctionCommand>>();
-        _handler = new StartAuctionCommandHandler(_auctionRepositoryMock.Object, _vehicleRepositoryMock.Object, _validatorMock.Object);
+        _schedulerFactoryMock = new Mock<ISchedulerFactory>();
+        _handler = new StartAuctionCommandHandler(_auctionRepositoryMock.Object, _vehicleRepositoryMock.Object, _schedulerFactoryMock.Object, _validatorMock.Object);
     }
     
     [Fact]
@@ -51,6 +54,8 @@ public class StartAuctionHandlerTests
             .Returns(nullAuction);
         _auctionRepositoryMock.Setup(auctionMock => auctionMock.StartAuction(It.Is<Auction>(a => a.Vin == command.Vin), CancellationToken.None))
             .Returns(true);
+        _schedulerFactoryMock.Setup(schedule => schedule.GetScheduler(It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new Mock<IScheduler>().Object);
 
         // Act
         var result = _handler.Handle(command, CancellationToken.None);
