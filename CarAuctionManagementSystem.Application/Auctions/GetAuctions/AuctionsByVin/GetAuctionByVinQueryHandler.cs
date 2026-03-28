@@ -9,7 +9,7 @@ public class GetAuctionByVinQueryHandler(IAuctionRepository auctionRepository) :
     public Result<Auction> Handle(GetAuctionByVinQuery query, 
                                    CancellationToken cancellationToken)
     {
-        Auction? auction = auctionRepository.GetAuctionByVin(query.Vin);
+        Auction? auction = auctionRepository.GetByVin(query.Vin);
 
         if (auction is not null)
         {

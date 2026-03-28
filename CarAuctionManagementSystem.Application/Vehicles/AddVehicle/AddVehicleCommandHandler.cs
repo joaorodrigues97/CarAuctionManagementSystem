@@ -19,27 +19,26 @@ public sealed class AddVehicleCommandHandler(IVehicleRepository vehicleRepositor
             return Result.Failure<bool>(validationResult.Errors.ConvertToError());
         }
 
-        var vehicleByVin = vehicleRepository.GetVehicleByVin(command.Vin!);
+        var vehicleByVin = vehicleRepository.GetByVin(command.Vin!);
 
         if (vehicleByVin is not null)
         {
             return Result.Failure<bool>([VehicleErrors.Conflict]);
         }
+
+        Vehicle vehicle = 
+            Vehicle.AddVehicle(
+                command.VehicleType,
+                command.NumberOfDoors,
+                command.NumberOfSeats,
+                command.LoadCapacity,
+                command.Vin,
+                command.Manufacturer,
+                command.Model,
+                command.Year,
+                command.Reserve);
         
-        Vehicle vehicle = new Vehicle
-        {
-            VehicleType = command.VehicleType,
-            Manufacturer = command.Manufacturer,
-            Model = command.Model,
-            Vin = command.Vin,
-            Year = command.Year,
-            LoadCapacity = command.LoadCapacity,
-            StartingBid = command.StartingBid,
-            NumberOfDoors = command.NumberOfDoors,
-            NumberOfSeats = command.NumberOfSeats
-        };
-        
-        var result = vehicleRepository.AddVehicle(vehicle);
+        var result = vehicleRepository.Add(vehicle);
         
         return Result.Success(result);
     }

@@ -30,13 +30,13 @@ public class GetAuctionByVinHandlerTests
             Vin = "safsdfsdsf",
             IsAuctionActive = false,
             LastBid = 0,
-            StartingBid = 10000,
+            Reserve = 10000,
             StartDate = DateTime.Now,
             EndDate = null,
             MeetReserve = null
         };
         
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctionByVin(query.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetByVin(query.Vin, CancellationToken.None))
             .Returns(auction);
         
         // Act
@@ -54,7 +54,7 @@ public class GetAuctionByVinHandlerTests
         var query = new GetAuctionByVinQuery("safsdfsdsf");
         Auction? auction = null;
         
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctionByVin(query.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetByVin(query.Vin, CancellationToken.None))
             .Returns(auction);
         
         // Act

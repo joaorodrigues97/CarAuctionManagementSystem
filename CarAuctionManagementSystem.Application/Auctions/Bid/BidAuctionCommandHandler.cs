@@ -18,14 +18,14 @@ public sealed class BidAuctionCommandHandler(IAuctionRepository auctionRepositor
             return Result.Failure<bool>(validationResult.Errors.ConvertToError());
         }
         
-        Auction? auction = auctionRepository.GetAuctionByVin(command.Vin);
+        Auction? auction = auctionRepository.GetByVin(command.Vin);
 
         if (auction is null)
         {
             return Result.Failure<bool>([AuctionErrors.NotFound]);
         }
         
-        bool isAuctionActive = auctionRepository.IsAuctionActive(command.Vin);
+        bool isAuctionActive = auctionRepository.IsActive(command.Vin);
 
         if (!isAuctionActive)
         {

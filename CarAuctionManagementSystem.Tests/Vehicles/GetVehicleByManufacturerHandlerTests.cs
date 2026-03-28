@@ -32,10 +32,10 @@ public class GetVehicleByManufacturerHandlerTests
             Manufacturer = "Ford",
             Model = "S-MAX",
             Year = 2020,
-            StartingBid = 10000
+            Reserve = 10000
         }];
         
-        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetVehicleByManufacturer(command.Manufacturer, CancellationToken.None))
+        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetByManufacturer(command.Manufacturer, CancellationToken.None))
             .Returns(vehicle);
 
         // Act
@@ -54,7 +54,7 @@ public class GetVehicleByManufacturerHandlerTests
         
         List<Vehicle> vehicle = [];
         
-        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetVehicleByManufacturer(command.Manufacturer, CancellationToken.None))
+        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetByManufacturer(command.Manufacturer, CancellationToken.None))
             .Returns(vehicle);
 
         // Act

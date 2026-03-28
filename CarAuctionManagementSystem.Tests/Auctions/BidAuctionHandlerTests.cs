@@ -32,16 +32,16 @@ public class BidAuctionHandlerTests
             Vin = "safsdfsdsf",
             IsAuctionActive = false,
             LastBid = 0,
-            StartingBid = 10000,
+            Reserve = 10000,
             StartDate = DateTime.Now,
             EndDate = null,
             MeetReserve = null
         };
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctionByVin(command.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetByVin(command.Vin, CancellationToken.None))
             .Returns(auction);
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.IsAuctionActive(command.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.IsActive(command.Vin, CancellationToken.None))
             .Returns(true);
         _auctionRepositoryMock.Setup(auctionMock => auctionMock.IsBidValid(command.Vin, command.Bid, CancellationToken.None))
             .Returns(true);
@@ -96,7 +96,7 @@ public class BidAuctionHandlerTests
         
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctionByVin(command.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetByVin(command.Vin, CancellationToken.None))
             .Returns(auction);
 
         
@@ -121,7 +121,7 @@ public class BidAuctionHandlerTests
             Vin = "safsdfsdsf",
             IsAuctionActive = false,
             LastBid = 0,
-            StartingBid = 10000,
+            Reserve = 10000,
             StartDate = DateTime.Now,
             EndDate = null,
             MeetReserve = null
@@ -129,9 +129,9 @@ public class BidAuctionHandlerTests
         
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctionByVin(command.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetByVin(command.Vin, CancellationToken.None))
             .Returns(auction);
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.IsAuctionActive(command.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.IsActive(command.Vin, CancellationToken.None))
             .Returns(false);
         
         // Act
@@ -155,7 +155,7 @@ public class BidAuctionHandlerTests
             Vin = "safsdfsdsf",
             IsAuctionActive = false,
             LastBid = 0,
-            StartingBid = 10000,
+            Reserve = 10000,
             StartDate = DateTime.Now,
             EndDate = null,
             MeetReserve = null
@@ -163,9 +163,9 @@ public class BidAuctionHandlerTests
         
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctionByVin(command.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetByVin(command.Vin, CancellationToken.None))
             .Returns(auction);
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.IsAuctionActive(command.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.IsActive(command.Vin, CancellationToken.None))
             .Returns(true);
         _auctionRepositoryMock.Setup(auctionMock => auctionMock.Bid(command.Bid, command.Vin, CancellationToken.None))
             .Returns(false);

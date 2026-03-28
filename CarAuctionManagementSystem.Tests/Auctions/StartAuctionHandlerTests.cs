@@ -43,16 +43,16 @@ public class StartAuctionHandlerTests
             Manufacturer = "Ford",
             Model = "S-MAX",
             Year = 2020,
-            StartingBid = 10000
+            Reserve = 10000
         };
         
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetVehicleByVin(command.Vin, CancellationToken.None))
+        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetByVin(command.Vin, CancellationToken.None))
             .Returns(vehicle);
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctionByVin(command.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetByVin(command.Vin, CancellationToken.None))
             .Returns(nullAuction);
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.StartAuction(It.Is<Auction>(a => a.Vin == command.Vin), CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.Add(It.Is<Auction>(a => a.Vin == command.Vin), CancellationToken.None))
             .Returns(true);
         _schedulerFactoryMock.Setup(schedule => schedule.GetScheduler(It.IsAny<CancellationToken>()))
             .ReturnsAsync(new Mock<IScheduler>().Object);
@@ -105,7 +105,7 @@ public class StartAuctionHandlerTests
         
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetVehicleByVin(command!.Vin, CancellationToken.None))
+        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetByVin(command!.Vin, CancellationToken.None))
             .Returns(nullVehicle);
 
         // Act
@@ -129,7 +129,7 @@ public class StartAuctionHandlerTests
             Vin = "safsdfsdsf",
             IsAuctionActive = false,
             LastBid = 0,
-            StartingBid = 10000,
+            Reserve = 10000,
             StartDate = DateTime.Now,
             EndDate = null,
             MeetReserve = null
@@ -143,14 +143,14 @@ public class StartAuctionHandlerTests
             Manufacturer = "Ford",
             Model = "S-MAX",
             Year = 2020,
-            StartingBid = 10000
+            Reserve = 10000
         };
         
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetVehicleByVin(command!.Vin, CancellationToken.None))
+        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetByVin(command!.Vin, CancellationToken.None))
             .Returns(vehicle);
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctionByVin(command!.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetByVin(command!.Vin, CancellationToken.None))
             .Returns(auction);
 
         // Act

@@ -11,4 +11,4 @@ public record AddVehicleCommand(VehicleTypes VehicleType,
                                 string? Manufacturer,
                                 string? Model,
                                 int? Year,
-                                int? StartingBid) : ICommand<bool>;
+                                int? Reserve) : ICommand<bool>;

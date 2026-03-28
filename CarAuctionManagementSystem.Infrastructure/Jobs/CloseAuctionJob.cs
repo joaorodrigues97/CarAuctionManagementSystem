@@ -10,8 +10,13 @@ public class CloseAuctionJob(IAuctionRepository auctionRepository) : IJob
         var jobData = context.MergedJobDataMap;
 
         string? vin = jobData.GetString("vin");
-        
-        var x = auctionRepository.StopAuction(vin ?? string.Empty);
+
+        Auction? auction = auctionRepository.GetByVin(vin);
+
+        if (auction is not null)
+        {
+            Auction.StopAuction(auction);
+        }
         
         return Task.CompletedTask;
     }

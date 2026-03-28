@@ -2,21 +2,23 @@ namespace CarAuctionManagementSystem.Domain.Vehicles;
 
 public interface IVehicleRepository
 {
-    bool AddVehicle(Vehicle vehicle, 
-                               CancellationToken cancellationToken = default);
-
-    List<Vehicle> GetVehicleByType(VehicleTypes vehicleType,
-                                   CancellationToken cancellationToken = default);
-
-    List<Vehicle> GetVehicleByManufacturer(string manufacturer,
-                                           CancellationToken cancellationToken = default);
-
-    List<Vehicle> GetVehicleByModel(string model,
-                                    CancellationToken cancellationToken = default);
+    bool Add(Vehicle vehicle,
+        CancellationToken cancellationToken = default);
     
-    List<Vehicle> GetVehicleByYear(int year, 
-                                   CancellationToken cancellationToken = default);
+    List<Vehicle> Get(CancellationToken cancellationToken = default);
+
+    List<Vehicle> GetByType(VehicleTypes vehicleType,
+        CancellationToken cancellationToken = default);
+
+    List<Vehicle> GetByManufacturer(string manufacturer,
+        CancellationToken cancellationToken = default);
+
+    List<Vehicle> GetByModel(string model,
+        CancellationToken cancellationToken = default);
     
-    Vehicle? GetVehicleByVin(string vin, 
-                             CancellationToken cancellationToken = default);
+    List<Vehicle> GetByYear(int year,
+        CancellationToken cancellationToken = default);
+    
+    Vehicle? GetByVin(string vin,
+        CancellationToken cancellationToken = default);
 }

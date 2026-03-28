@@ -10,7 +10,7 @@ Content-Type: application/json
   "Manufacturer": "Ford",
   "Model": "S-MAX",
   "Year": 2020,
-  "StartingBid": 10000
+  "Reserve": 10000
 }
 
 ###
@@ -24,6 +24,11 @@ Content-Type: application/json
   "VIN": "sdgdsgdfsseee",
   "Manufacturer": "Ford"
 }
+
+###
+
+GET {{CarAuctionManagementSystem_HostAddress}}/api/vehicles
+Accept: application/json
 
 ###
 

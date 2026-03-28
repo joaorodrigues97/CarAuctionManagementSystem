@@ -34,7 +34,7 @@ public class StopAuctionHandlerTests
             Vin = "safsdfsdsf",
             IsAuctionActive = false,
             LastBid = 0,
-            StartingBid = 10000,
+            Reserve = 10000,
             StartDate = DateTime.Now,
             EndDate = null,
             MeetReserve = null
@@ -42,11 +42,8 @@ public class StopAuctionHandlerTests
         
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctionByVin(command.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetByVin(command.Vin, CancellationToken.None))
             .Returns(auction);
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.StopAuction(command.Vin, CancellationToken.None))
-            .Returns(true);
-
         // Act
         var result = _handler.Handle(command, CancellationToken.None);
 
@@ -95,7 +92,7 @@ public class StopAuctionHandlerTests
         
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctionByVin(command.Vin, CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetByVin(command.Vin, CancellationToken.None))
             .Returns(nullAuction);
 
         // Act

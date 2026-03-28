@@ -18,20 +18,15 @@ public sealed class StopAuctionCommandHandler(IAuctionRepository auctionReposito
             return Result.Failure<bool>(validationResult.Errors.ConvertToError());
         }
         
-        var auctionByVin = auctionRepository.GetAuctionByVin(command.Vin!);
+        var auctionByVin = auctionRepository.GetByVin(command.Vin!);
 
         if (auctionByVin is null)
         {
             return Result.Failure<bool>([AuctionErrors.NotFound]);
         }
         
-        var result = auctionRepository.StopAuction(command.Vin);
+        Auction.StopAuction(auctionByVin);
 
-        if (result)
-        {
-            return Result.Success(result);
-        }
-        
-        return Result.Failure<bool>([AuctionErrors.NotFound]);
+        return Result.Success(true);
     }
 }

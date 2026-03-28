@@ -29,13 +29,13 @@ public class GetAllAuctionsHandlerTests
             Vin = "safsdfsdsf",
             IsAuctionActive = false,
             LastBid = 0,
-            StartingBid = 10000,
+            Reserve = 10000,
             StartDate = DateTime.Now,
             EndDate = null,
             MeetReserve = null
         }];
         
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctions(CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.Get(CancellationToken.None))
             .Returns(auction);
         
         // Act
@@ -53,7 +53,7 @@ public class GetAllAuctionsHandlerTests
         var query = new GetAllAuctionsQuery();
         List<Auction>? auction = [];
         
-        _auctionRepositoryMock.Setup(auctionMock => auctionMock.GetAuctions(CancellationToken.None))
+        _auctionRepositoryMock.Setup(auctionMock => auctionMock.Get(CancellationToken.None))
             .Returns(auction);
         
         // Act

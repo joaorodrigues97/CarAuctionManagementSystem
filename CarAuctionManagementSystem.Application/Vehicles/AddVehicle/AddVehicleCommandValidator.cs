@@ -67,7 +67,7 @@ public class AddVehicleCommandValidator : AbstractValidator<AddVehicleCommand>
             .WithErrorCode("Vehicles.BadRequest")
             .WithMessage("Year is a required field");
         
-        RuleFor(input => input.StartingBid)
+        RuleFor(input => input.Reserve)
             .NotEmpty()
             .WithErrorCode("Vehicles.BadRequest")
             .WithMessage("Starting bid is a required field");

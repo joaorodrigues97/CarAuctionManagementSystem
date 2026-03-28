@@ -9,7 +9,7 @@ public sealed class GetVehicleByYearQueryHandler(IVehicleRepository vehicleRepos
     public Result<List<Vehicle>> Handle(GetVehicleByYearQuery query, 
                                         CancellationToken cancellationToken)
     {
-        List<Vehicle> vehiclesList = vehicleRepository.GetVehicleByYear(query.Year);
+        List<Vehicle> vehiclesList = vehicleRepository.GetByYear(query.Year);
         
         if (vehiclesList.Count > 0)
         {

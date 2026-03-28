@@ -24,29 +24,25 @@ public sealed class StartAuctionCommandHandler(IAuctionRepository auctionReposit
             return Result.Failure<bool>(validationResult.Errors.ConvertToError());
         }
         
-        var vehicleByVin = vehicleRepository.GetVehicleByVin(command.Vin!);
+        var vehicleByVin = vehicleRepository.GetByVin(command.Vin!);
 
         if (vehicleByVin is null)
         {
             return Result.Failure<bool>([AuctionErrors.VehicleNotExistsConflict]);
         }
 
-        var auctionByVin = auctionRepository.GetAuctionByVin(command.Vin!);
+        var auctionByVin = auctionRepository.GetByVin(command.Vin!);
 
         if (auctionByVin is not null)
         {
             return Result.Failure<bool>([AuctionErrors.AuctionConflict]);
         }
 
-        ScheduleCloseAuctionJob(command.Vin, cancellationToken);
-        
-        Auction auction = new Auction
-        {
-            Vin = command.Vin,
-            StartingBid = vehicleByVin.StartingBid
-        };
+        ScheduleCloseAuctionJob(command.Vin!, cancellationToken);
 
-        var result = auctionRepository.StartAuction(auction, cancellationToken);
+        Auction auction = Auction.AddAuction(command.Vin!, vehicleByVin.Reserve);
+
+        var result = auctionRepository.Add(auction, cancellationToken);
 
         return Result.Create(result);
     }

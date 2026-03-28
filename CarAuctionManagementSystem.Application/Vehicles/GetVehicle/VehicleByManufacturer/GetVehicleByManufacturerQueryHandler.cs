@@ -9,7 +9,7 @@ public sealed class GetVehicleByManufacturerQueryHandler(IVehicleRepository vehi
     public Result<List<Vehicle>> Handle(GetVehicleByManufacturerQuery query, 
                                         CancellationToken cancellationToken)
     {
-        List<Vehicle> vehiclesList = vehicleRepository.GetVehicleByManufacturer(query.Manufacturer);
+        List<Vehicle> vehiclesList = vehicleRepository.GetByManufacturer(query.Manufacturer);
 
         if (vehiclesList.Count > 0)
         {

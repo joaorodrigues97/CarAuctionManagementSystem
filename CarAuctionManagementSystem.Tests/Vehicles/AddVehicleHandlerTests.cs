@@ -47,14 +47,14 @@ public class AddVehicleHandlerTests
             Manufacturer = "Ford",
             Model = "S-MAX",
             Year = 2020,
-            StartingBid = 10000
+            Reserve = 10000
         };
         
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetVehicleByVin(command.Vin, CancellationToken.None))
+        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetByVin(command.Vin, CancellationToken.None))
             .Returns(nullVehicle);
-        _vehicleRepositoryMock.Setup(auctionMock => auctionMock.AddVehicle(vehicle, CancellationToken.None))
+        _vehicleRepositoryMock.Setup(auctionMock => auctionMock.Add(vehicle, CancellationToken.None))
             .Returns(true);
 
         // Act
@@ -125,12 +125,12 @@ public class AddVehicleHandlerTests
             Manufacturer = "Ford",
             Model = "S-MAX",
             Year = 2020,
-            StartingBid = 10000
+            Reserve = 10000
         };
         
         _validatorMock.Setup(validator => validator.Validate(command))
             .Returns(new ValidationResult());
-        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetVehicleByVin(command.Vin, CancellationToken.None))
+        _vehicleRepositoryMock.Setup(vehicleMock => vehicleMock.GetByVin(command.Vin, CancellationToken.None))
             .Returns(vehicle);
 
         // Act

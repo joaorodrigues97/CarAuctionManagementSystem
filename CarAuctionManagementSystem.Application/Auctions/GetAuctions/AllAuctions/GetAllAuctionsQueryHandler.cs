@@ -8,7 +8,7 @@ public sealed class GetAllAuctionsQueryHandler(IAuctionRepository auctionReposit
 {
     public Result<List<Auction>> Handle(GetAllAuctionsQuery query, CancellationToken cancellationToken)
     {
-        List<Auction>? auctionsList = auctionRepository.GetAuctions();
+        List<Auction>? auctionsList = auctionRepository.Get();
 
         if (auctionsList.Count > 0)
         {

@@ -5,6 +5,7 @@ using CarAuctionManagementSystem.Application.Auctions.GetAuctions.AuctionsByVin;
 using CarAuctionManagementSystem.Application.Auctions.StartAuction;
 using CarAuctionManagementSystem.Application.Auctions.StopAuction;
 using CarAuctionManagementSystem.Application.Vehicles.AddVehicle;
+using CarAuctionManagementSystem.Application.Vehicles.GetVehicle.AllVehicles;
 using CarAuctionManagementSystem.Application.Vehicles.GetVehicle.VehicleByManufacturer;
 using CarAuctionManagementSystem.Application.Vehicles.GetVehicle.VehicleByModel;
 using CarAuctionManagementSystem.Application.Vehicles.GetVehicle.VehicleByType;
@@ -27,6 +28,7 @@ public static class DependencyInjection
         services.AddScoped<IQueryHandler<GetVehicleByManufacturerQuery, List<Vehicle>>, GetVehicleByManufacturerQueryHandler>();
         services.AddScoped<IQueryHandler<GetVehicleByModelQuery, List<Vehicle>>, GetVehicleByModelQueryHandler>();
         services.AddScoped<IQueryHandler<GetVehicleByYearQuery, List<Vehicle>>, GetVehicleByYearQueryHandler>();
+        services.AddScoped<IQueryHandler<GetAllVehiclesQuery, List<Vehicle>>, GetAllVehiclesQueryHandler>();
         //Command & Queries : Auctions
         services.AddScoped<IQueryHandler<GetAuctionByVinQuery, Auction>, GetAuctionByVinQueryHandler>();
         services.AddScoped<IQueryHandler<GetAllAuctionsQuery, List<Auction>>, GetAllAuctionsQueryHandler>();
